@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
   socket.on('join-room', (ROOM_ID) => {
     const clientIds = Array.from(io.sockets.adapter.rooms.get(ROOM_ID) || []);
 
-    if (clientIds.length >= 2) {
+    if (clientIds.length >= 4) {
       socket.emit('room-full');
     } else {
       socket.join(ROOM_ID);
