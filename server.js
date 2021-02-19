@@ -5,16 +5,17 @@ const cors = require('cors');
 
 const app = express();
 const server = http.Server(app);
+const PORT = process.env.PORT || 3030;
 
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   },
 });
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   })
 );
 
@@ -58,6 +59,6 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(3030, () => {
-  console.log('Server starts');
+server.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
 });
